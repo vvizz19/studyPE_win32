@@ -159,5 +159,5 @@ void CstudyPE_win32Dlg::OnBnClickedOk()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	MessageBox(TEXT("This is a MessageBox"), TEXT("studyPE"), MB_OK);
-	CDialogEx::OnOK();
+	//CDialogEx::OnOK();
 }
