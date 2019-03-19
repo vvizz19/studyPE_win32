@@ -64,6 +64,7 @@ BEGIN_MESSAGE_MAP(CstudyPE_win32Dlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDOK, &CstudyPE_win32Dlg::OnBnClickedOk)
 END_MESSAGE_MAP()
 
 
@@ -152,3 +153,11 @@ HCURSOR CstudyPE_win32Dlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void CstudyPE_win32Dlg::OnBnClickedOk()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	MessageBox(TEXT("This is a MessageBox"), TEXT("studyPE"), MB_OK);
+	CDialogEx::OnOK();
+}
