@@ -153,11 +153,31 @@ HCURSOR CstudyPE_win32Dlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-
-
 void CstudyPE_win32Dlg::OnBnClickedOk()
 {
-	// TODO: 在此添加控件通知处理程序代码
-	MessageBox(TEXT("This is a MessageBox"), TEXT("studyPE"), MB_OK);
-	//CDialogEx::OnOK();
+	HANDLE hFile = NULL;				// file handle
+	TCHAR szFileName[] = _T("PE.exe");	// file name
+	CString* szMsg = new CString();		// message for show
+	TCHAR szPE[1024] = { 0 };			// contain the PE file, for read part struct
+	DWORD dwSize = 0;					// size of read
+
+	hFile = CreateFile(szFileName, GENERIC_READ, FILE_SHARE_READ, 0, OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);	// open file
+	if (NULL != hFile)
+	{
+		MessageBox(_T("OK"));
+		BOOL b = ReadFile(hFile, szPE, sizeof(IMAGE_DOS_HEADER), &dwSize, NULL);
+		szMsg->Format(_T("%02X %02X"), szPE[0], szPE[1]);
+		MessageBox(szMsg->GetString());
+	}
+	else
+	{
+		MessageBox(_T("ERROR"));
+	}
+
+	// if handle is alive, kill him.
+	if (NULL != hFile)
+	{
+		CloseHandle(hFile);
+		hFile = NULL;
+	}
 }
